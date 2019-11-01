@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <title>WEUI框架学习</title>
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/example.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery-weui.min.js"></script>
+
+
+</head>
+<body>
+<div class="page">
+
+    <div class="weui-tab"  style="height: 100%">
+
+                <div class="weui-tab__panel" id="tabbar-page1">
+                    <div class="weui-cells">
+<!--                        <a class="weui-cell weui-cell_access" href="cubic" >-->
+<!--                            <div class="weui-cell__bd">-->
+<!--                                <p>魔方</p>-->
+<!--                            </div>-->
+<!--                            <div class="weui-cell__ft">-->
+<!--                            </div>-->
+<!--                        </a>-->
+                        <a class="weui-cell weui-cell_access" href="studentinfo" >
+                            <div class="weui-cell__bd">
+                                <p>测试数据滚动加载</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                            </div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="game1" >
+                            <div class="weui-cell__bd">
+                                <p>接&nbsp头&nbsp霸&nbsp王</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                            </div>
+                        </a>
+                        <a class="weui-cell weui-cell_access" href="recruit" >
+                            <div class="weui-cell__bd">
+                                <p>踩 蛋</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="weui-tab__panel" id="tabbar-page2" hidden>
+                    页面2
+                </div>
+                <div class="weui-tab__panel" id="tabbar-page3" hidden>
+                    页面3
+                </div>
+                <div class="weui-tab__panel" id="tabbar-page4" hidden>
+                    <iframe src="me">
+                        您的浏览器不支持iframe，请升级
+                    </iframe>
+                </div>
+
+
+            <div class="weui-tabbar">
+                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on" id="tabbar1">
+                    <span style="display: inline-block;position: relative;">
+                        <img src="../images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</span>
+                    </span>
+                    <p class="weui-tabbar__label">功能</p>
+                </a>
+                <a href="javascript:;" class="weui-tabbar__item" id="tabbar2">
+                    <img src="../images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">备用</p>
+                </a>
+                <a href="javascript:;" class="weui-tabbar__item" id="tabbar3">
+                    <span style="display: inline-block;position: relative;">
+                        <img src="../images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
+                    </span>
+                    <p class="weui-tabbar__label">发现</p>
+                </a>
+                <a href="javascript:;" class="weui-tabbar__item" id="tabbar4">
+                    <img src="../images/me-icon.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">我</p>
+                </a>
+            </div>
+
+        </div>
+</div>
+
+<script type="text/javascript" class="tabbar js_show">
+    $(function(){
+        $('#tabbar1').on('click', function () {
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+            $('#tabbar-page1').show().siblings('.weui-tab__panel').hide();
+        });
+    });
+    $(function(){
+        $('#tabbar2').on('click', function () {
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+            $('#tabbar-page2').show().siblings('.weui-tab__panel').hide();
+        });
+    });
+    $(function(){
+        $('#tabbar3').on('click', function () {
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+            $('#tabbar-page3').show().siblings('.weui-tab__panel').hide();
+        });
+    });
+    $(function(){
+        $('#tabbar4').on('click', function () {
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+            $('#tabbar-page4').show().siblings('.weui-tab__panel').hide();
+        });
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+debug: true
+spring:
+  datasource:
+    driverClassName:  com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://123.56.31.209:3306/jojologin?serverTimezone=GMT%2B8
+    username: root
+    password: 12345678
+  devtools:
+#    restart:
+#      enabled: true  #设置开启热部署
+#    freemarker:
+#      cache: false    #页面不加载缓存，修改即时生效
+    restart:
+    #需要实时更新的目录
+      additional-paths: resources/**,static/**,templates/**
+logging.level.org.springframework.boot.autoconfigure: ERROR
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.example.westudy.entity
+logging:
+  file: C:/mylog/logging.log

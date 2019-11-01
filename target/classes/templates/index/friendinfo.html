@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:overflow="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/example.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/jquery-weui.min.js"></script>
+</head>
+<body>
+
+
+<div class="weui-tab__panel" id="listwrap" onclick="alert('还没做')" style="overflow:auto;height: 100%">
+    <h1 class="page__title">&nbsp&nbsp&nbsp联系人</h1>
+<!--    <div class="weui-search-bar" id="searchBar">-->
+<!--        <form class="weui-search-bar__form">-->
+<!--            <div class="weui-search-bar__box">-->
+<!--                <i class="weui-icon-search"></i>-->
+<!--                <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">-->
+<!--                <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>-->
+<!--            </div>-->
+<!--            <label class="weui-search-bar__label" id="searchText">-->
+<!--                <i class="weui-icon-search"></i>-->
+<!--                <span>搜索</span>-->
+<!--            </label>-->
+<!--        </form>-->
+<!--        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>-->
+<!--    </div>-->
+
+
+    <div class="weui-cells" id="list">
+<!--append在这里扩充-->
+    </div>
+<!--    //加载中-->
+    <div class="weui-loadmore" id="loading" style="display: none;line-height:1em;margin: 1em auto 1em;">
+        <i class="weui-loading" ></i>
+        <span class="weui-loadmore__tips">加载中...</span>
+    </div>
+</div>
+</div>
+
+<script>
+    // 获取总页数
+
+    var page = 0;
+    var totalPage = 1;
+    $.ajax({
+        type: "POST",
+        url: "../tabbar/getTotalPage",
+        async: false,
+        success: function (data) {
+            totalPage = data.data;
+            console.log(totalPage+"总页数");
+        }
+    });
+// 滚动加载起始页
+    $('#loading').show();
+    setTimeout(function () {
+        if (page<=totalPage){
+            loadlist();
+        }else {
+            $("#loading>i").css("display","none");
+            $("#loading>span").html("到底啦~").css("color","#BDBDBD");
+        }
+        loading = false;
+    }, 500);
+    //滚动加载
+    var loading = false;  //状态标记
+    $(function (){
+        $("#listwrap").infinite().on("infinite", function () {
+        if (loading) return;
+        loading = true;
+        $('#loading').show();
+        setTimeout(function () {
+            if (page<=totalPage){
+                loadlist();
+            }else {
+                $("#loading>i").css("display","none");
+                $("#loading>span").html("到底啦~").css("color","#BDBDBD");
+            }
+            loading = false;
+        }, 500);   //模拟延迟
+    })})
+
+    function loadlist() {
+        console.log(page+"当前页");
+        page++;
+        $.ajax({
+            type: "POST",
+            url: "../tabbar/getFriendInfo",
+            data: {
+                page: page
+            },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                if (data.msg == "ok") {
+                    var list = data.data;
+                    for (var i = 0; i < list.length; i++) {
+                        var param = JSON.stringify({param1: list[i].name, param2: list[i].tel});
+                        $("#list").append('' +
+
+                            '                <div class="weui-cell">\n' +
+                            '<div class="weui-cell__hd" style="position: relative;margin-right: 10px;">\n' +
+                                '<img src="../images/me-icon.png" style="width: 50px;display: block">\n'+
+                            '</div>\n'+
+                            '<div class="weui-cell__db">\n'+
+                            '                    <p>' + list[i].name + '</p>\n' +
+                                '<p style="font-size: 13px;color: #888888;">' + list[i].tel + '</p>\n'+
+                            '                </div>\n' +
+
+
+                            '            </div>')
+                    }
+                } else {
+                    alert("页面错误")
+                }
+            }
+        })
+    }
+</script>
+
+</body>
+</html>
